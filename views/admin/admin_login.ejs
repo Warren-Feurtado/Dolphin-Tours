@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' href='/stylesheets/login.css' />
+    <script src="https://kit.fontawesome.com/d1a2b3af9c.js" crossorigin="anonymous"></script>
+    <title><%= title %></title>
+</head>
+<body>
+
+
+    <nav>
+        <a href="/">
+            <div class="logo">
+                <img src="https://www.dolphincoveja.com/Content/src/logo.png" alt="">
+            </div>
+        </a>
+
+        <div class="navLinksContain">
+            <a href="" class="midNav_link">Parks</a>
+            <a href="" class="midNav_link">Information</a>
+            <a href="" class="midNav_link">News</a>
+            <a href="" class="midNav_link">contact Us</a>
+            <a href="" class="midNav_link">Deals</a>
+        </div>
+         <div class="tollFree">
+            <h3>
+                <i class="fa-solid fa-phone"></i> 1-866-<span class="large">393-5158</span>
+                <img src="https://www.dolphincoveja.com/Content/src/jamFlag.jpg" alt="">
+                <i class="fa-solid fa-sort-down"></i>
+            </h3>
+            <a href=""><i class="fa-solid fa-cart-shopping"></i></a>
+        </div>
+    </nav>
+
+
+    <div class="body_contain">
+        <div class="left">
+            <!-- <h1 style="text-align: center; color: white; margin-top: 2vw;">WELCOME ADMIN</h1> -->
+            <img src="https://www.pngall.com/wp-content/uploads/2016/05/Dolphin-PNG-Image.png" alt="" style="width: 50vw; left: -3vw;">
+            <!-- <a href="/"><span class="diamond"></span></a> -->
+        </div>
+        <div class="right">
+            <form action="/login/admin/check" method="post">
+                <h1>ADMIN LOG IN</h1>
+                <div class="inptBx">
+                    <label for="adm_email">Email <span style="color: red;">*</span></label><br>
+                    <input type="email" id="adm_email" name="email" placeholder="Email Address">
+                </div>
+                <div class="inptBx">
+                    <label for="adm_pss">Password <span style="color: red;">*</span></label><br>
+                    <input type="password" id="adm_pss" name="password" placeholder="Password">
+                </div>
+
+                <button class="frm_btn" type="submit"><i class="fa-solid fa-arrow-right-to-bracket"></i> Log in</button>
+                <span>Not Yet a Member? <a href="/user/sign-up">Sign Up Here.</a></span>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

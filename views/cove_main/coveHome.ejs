@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/coveMain.css">
+    <script src="https://kit.fontawesome.com/d1a2b3af9c.js" crossorigin="anonymous"></script>
+    <title><%= title %></title>
+</head>
+<body>
+    <header>
+        <div class="topNav">
+            <div class="scoialContain">
+                <a class="scl_links">
+                    <i class="fa-brands fa-facebook-f"></i>
+                </a>
+                <a class="scl_links">
+                    <i class="fa-brands fa-twitter"></i>
+                </a>
+                <a class="scl_links">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+                <a class="scl_links">
+                    <i class="fa-brands fa-youtube"></i>
+                </a>
+            </div>
+
+            <div class="logo">
+                <img src="https://www.dolphincoveja.com/Content/src/logo.png" alt="">
+            </div>
+
+            <div class="rightBx">
+                <div class="topLnks">
+                    <a href="">CONTACT US</a>
+                    <a href="">INVESTOR RELATIONS</a>
+                    <a href=""><i class="fa-solid fa-cart-shopping"></i></a>
+                </div>
+                <div class="tollFree">
+                    <h3>
+                        <i class="fa-solid fa-phone"></i> 1-866-<span class="large">393-5158</span>
+                        <img src="https://www.dolphincoveja.com/Content/src/jamFlag.jpg" alt="">
+                        <i class="fa-solid fa-sort-down"></i>
+                    </h3>
+                </div>
+            </div>
+        </div>
+        <nav class="midNav">
+            <div class="navLinksContain">
+                <a href="" class="midNav_link">Parks</a>
+                <a href="" class="midNav_link">Information</a>
+                <a href="" class="midNav_link">News</a>
+                <a href="" class="midNav_link">Deals</a>
+            </div>
+            <div class="admin">
+                <a href="/admin">admin</a>
+            </div>
+        </nav>
+        <div class="protocol">
+            <a href=""><i class="fa-solid fa-shield-virus"></i> Dolphin Cares: Integral Hygiene and safety protocols. Read more!</a>
+        </div>
+    </header>
+
+    <section class="sect1">
+        <img src="https://www.dtraveller.com/promotions/imagesDD/HOME_new_Desk_Dolphin-Cove_-ING.jpg?v=1" alt="">
+    </section>
+    <div class="welcome">
+        <h1>Welcome to Dolphin Cove Jamaica</h1>
+        <p>Part of the Dolphin Discovery Group, the largest dolphin company in the world</p>
+    </div>
+    <section class="sect2">
+        <h1>OUR PARKS</h1>
+
+        <div class="parksContain">
+            <% if (prkData.length){
+                for (i = 0; i < prkData.length; i++){%>
+                    <a href="/parks/<%= prkData[i].id %>">
+                        <div class="park">
+                            <img src="<%= prkData[i].prk_img %>" alt="">
+                            <img src="https://www.dolphincoveja.com/Content/src/program-txt.png" alt="">
+                            <P><%= prkData[i].prk_nm %></P>
+                        </div>
+                    </a>
+                <%}
+            } else {%>
+                <span>NO DATA</span> 
+            <%} %>   
+        </div>
+    </section>
+</body>
+</html>

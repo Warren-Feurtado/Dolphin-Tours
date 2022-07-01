@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/parkDetails.css">
+    <script src="https://kit.fontawesome.com/d1a2b3af9c.js" crossorigin="anonymous"></script>
+    <title><%= title %></title>
+</head>
+<body>
+    <!-- <h1>Park Details Works!</h1> -->
+
+        <% if (locaData && prgmData){ %>
+            <nav>
+                <a href="/">
+                    <div class="logo">
+                        <img src="https://www.dolphincoveja.com/Content/src/logo.png" alt="">
+                    </div>
+                </a>
+
+                <div class="navLinksContain">
+                    <a href="" class="midNav_link">Parks</a>
+                    <a href="" class="midNav_link">Information</a>
+                    <a href="" class="midNav_link">News</a>
+                    <a href="" class="midNav_link">contact Us</a>
+                    <a href="" class="midNav_link">Deals</a>
+                </div>
+                 <div class="tollFree">
+                    <h3>
+                        <i class="fa-solid fa-phone"></i> 1-866-<span class="large">393-5158</span>
+                        <img src="https://www.dolphincoveja.com/Content/src/jamFlag.jpg" alt="">
+                        <i class="fa-solid fa-sort-down"></i>
+                    </h3>
+                    <a href=""><i class="fa-solid fa-cart-shopping"></i></a>
+                </div>
+            </nav>
+
+            <div class="bannerImg">
+                <img src="<%= locaData.prk_img %>" alt="">
+                <h1><%= locaData.prk_nm %></h1>
+            </div>
+
+            <section class="detailSect1">
+
+                <!-------- MONTEGO BAY PARK DETAILS -------->
+                <% if (locaData.prk_nm == 'Dolphin Cove Montego Bay'){%>
+
+                    <div class="info_form">
+                        <div class="left">
+                            <h2>
+                                Come closer to Jamaica's nature!
+                            </h2>
+                            <br>
+                            <P class="prkDetsPara">
+                                <b>Dolphin Cove Montego Bay</b> is in a magnificent property situated on 23 acres of ocean frontage in just a short car ride from Negril. You will have the opportunity to interact and <b>swim with dolphins</b>, enjoying the thrill and love of these amazing lovable marine mammals.
+                                <br><br>
+                                <b>Did you know that swimming with dolphins is considered one of the top ten bucket list items?</b> When you come to Dolphin Cove Montego Bay, you not only get a chance to live this dream; you have the opportunity to interact with stingrays. Montego Bay Dolphin Cove is a place where you come for the day but remember for a lifetime.
+                                <br><br>
+                                Here is the place for the best tours in Montego Bay since the <b>entrance fee includes</b> a day enjoying lots of fun activities. There is something for everyone!.
+                                <br><br>
+                                Entrance is included with all Montego Bay dolphin swims and sharks interactive programs. Once at Dolphin Cove, <b>you’ll have the Experience of a Lifetime!</b>
+                            </P>
+                            <h2>
+                                Come and make your dream of swimming with dolphins in Jamaica come true!
+                            </h2>
+
+                            <div class="prgrmsContain">
+                                <% if (prgmData){
+                                    for (i = 0; i < prgmData.length; i++){%>
+                                        <a href="">
+                                            <div class="prgm">
+                                                <img src="<%= prgmData[i].prg_img %>" alt="">
+                                                <div class="prgmInfo">
+                                                    <h3><%= prgmData[i].prg_nm %></h3>
+                                                    <p><%= prgmData[i].prg_des %></p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    <%}
+                                    
+                                }%>
+                            </div>
+                        </div>
+
+                        <div class="right">
+                            <form action="/reserve" method="post" class="bkngForm">
+                                <h3>MAKE YOUR RESERVATION</h3>
+                                <input type="hidden" name="locId" value="1">
+                                <input type="hidden" name="bkn_dt" value="<%= res_dt %>">
+                                <input type="hidden" name="bkn_type" value="1">
+                                <input type="hidden" class="priceInt">
+
+                                <div class="step1">
+                                    <h4>Reservation Info:</h4>
+                                    <div class="inptBx">
+                                        <label for="prgm"><i class="fa-solid fa-location-arrow"></i> Choose the activity</label>
+                                        <br>
+                                        <select id="prgm" name="prgm" onchange="update()">
+                                            <option disabled>--Select activity--</option>
+                                            <% if (prgmData){
+                                                for (i = 0; i < prgmData.length; i++){ %>
+                                                    <option id="prgOpt" value="<%= prgmData[i].id %>" data-prg_prc="<%= prgmData[i].prg_prc %>"><%= prgmData[i].prg_nm %></option>
+                                                <%}
+                                            }%>
+                                        </select>
+                                    </div>
+
+                                    <div class="flexInptBx">
+                                        <div class="inpt">
+                                            <label for="schedDt"><i class="fa-solid fa-calendar-days"></i> Date</label><br>
+                                            <input type="date" id="schedDt" name="schedDt">
+                                        </div>
+
+                                        <div class="inpt2">
+                                            <label for="schedTm"><i class="fa-solid fa-clock"></i> Schedule</label><br>
+                                            <select name="schedTm" id="schedTm">
+                                                <% if (schedData){
+                                                    for (i = 0; i < schedData.length; i++){%>
+                                                        <option value="<%= schedData[i].id %>"><%= schedData[i].sched_tm %></option>
+                                                    <%}
+                                                } %> 
+                                            </select>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="inptBx">
+                                        <label for="gst_amnt"><i class="fa-solid fa-user-group"></i> Participants</label><br>
+                                        <input type="number" id="gst_amnt" name="gst_amnt" value="2" onkeyup="update()" min="1">
+                                    </div>
+                                    <div class="total">
+                                        
+                                        <h2 class=" ">Total</h2> <input class="price" disabled>
+                                        
+                                    </div>
+                                        
+                                    <div class="btnContain">
+                                        <button type="button" onclick="next()">Next</button>
+                                    </div>
+                                </div>
+                            
+                                <div class="step2">
+                                    <h4>Personal Info</h4>
+
+                                    <div class="inptBx">
+                                        <label for="gstFnm">First name</label><br>
+                                            <input type="text" id="gstFnm" name="gstFnm"> 
+                                    </div>
+                                    <div class="inptBx">
+                                        <label for="gstLnm">Last name</label><br>
+                                            <input type="text" id="gstLnm" name="gstLnm">
+                                    </div>
+                                    <div class="inptBx">
+                                        <label for="gstPhn">Phone number</label>
+                                        <input type="text" id="gstPhn" name="gstPhn"> 
+                                    </div>
+                                    <div class="inptBx">
+                                        <label for="gstAdrs">Address / Hotel</label>
+                                        <textarea type="text" id="gstAdrs" name="gstAdrs"></textarea>
+                                    </div>
+                                    <button type="button" onclick="back()" >back</button>
+                                    <button type="button" onclick="next()">next</button>
+                                </div>
+                           
+                                <div class="step3">
+                                    <h4>Billing Info</h4>
+                                    <div class="inptBx">
+                                        <label for="pmtType">Select a payment type</label><br>
+                                        <select id="pmtType" name="pmtType" onchange="update()">
+                                            <option disabled>--Select payment type--</option>
+                                            <% if (payTypeData){
+                                                for (i = 0; i < payTypeData.length; i++){ %>
+                                                    <option value="<%= payTypeData[i].id %>"><%= payTypeData[i].pmt_typs %></option>
+                                                <%}
+                                            }%>
+                                        </select>
+                                    </div>
+
+                                    <div class="inptBx">
+                                        <label for="crdNum">Enter your card number</label>
+                                        <input type="text" id="crdNum" name="crdNum" > 
+                                    </div>
+
+                                    <div class="inptBx">
+                                        <label for="crdHldr">Enter name of card holder</label>
+                                        <input type="text" id="crdHldr" name="crdHldr" > 
+                                    </div>
+
+                                    <button type="button" onclick="back()">back</button>
+                                    <button type="submit">Submit</button>
+                                </div>
+
+                            </form>
+                        </div>
+                    
+                    </div>
+                    
+                    
+                    <!-------- OCHO RIOS PARK DETAILS -------->
+                <%}else if (locaData.prk_nm == 'Dolphin Cove Ocho Rios'){%>
+
+                    <div class="info_form">
+                        <div class="left">
+                            <h2>
+                                The Caribbean's number one attraction!
+                            </h2>
+                            <br>
+                            <P class="prkDetsPara">
+                                <b>Dolphin Cove Ocho Rios Jamaica</b> has a natural cove which is surrounded by <b>5 acres of lush tropical rainforest</b>. Visitors have the opportunity to interact and swim with jamaican dolphins in their natural environment while enjoying the thrill and love of these amazing marine mammals. Visitors can also swim, hold, feed, and learn about the evolutionary secrets of the Caribbean sharks.
+                                <br><br>
+                                <b>Dolphin Cove Ocho Ríos Jamaica</b> is full of natural wonders and beauty, <b>you gotta see it for yourself!</b>. At Dolphin Cove Jamaica, we respect the environment of all the species, here you will live the most natural experience you’ve ever had. Jamaica Dolphin Cove is the place to spend the day enjoying lots of fun activities. There is something for everyone.
+                                <br><br>
+                                Dolphin Cove Ocho Rios entrance cost includes full use of the following activities:
+                                <br><br>
+                                Interact and snorkel with stingrays<br>
+                                Relax on our glistening white sandy beaches<br>
+                                Guests can enjoy the tropical surroundings, taste our famous Jamaican coffee at our Star Buccaneers coffee shop, browse for souvenirs or jewellery at our very own gift shops. Be entertained while you are having lunch against the backdrop of the Caribbean Sea. Play some games, win a prize, learn a little about Jamaica and Dolphins. At Dolphin Cove Jamaica there are activities to keep you busy for the entire day.
+                                <br><br>
+                                <b>The Dolphin Cove Jamaica Entrance Fee is included with all dolphin and shark interactive programs.</b>
+                            </P>
+
+                            <h2>
+                                Once at Dolphin Cove Jamaica, you’ll have the Experience of a Lifetime!
+                            </h2>
+        
+                            <div class="prgrmsContain">
+                                <% if (prgmData){
+                                    for (i = 0; i < prgmData.length; i++){%>
+                                        <a href="">
+                                            <div class="prgm">
+                                                <img src="<%= prgmData[i].prg_img %>" alt="">
+                                                <div class="prgmInfo">
+                                                    <h3><%= prgmData[i].prg_nm %></h3>
+                                                    <p><%= prgmData[i].prg_des %></p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    <%}
+                                    
+                                }%>
+                            </div>
+                        </div>
+
+                        <div class="right">
+                            <form action="/reserve" method="post" class="bkngForm">
+                                <h3>MAKE YOUR RESERVATION</h3>
+                                
+                                <input type="hidden" name="locId" value="2">
+                                <input type="hidden" name="bkn_dt" value="<%= res_dt %>">
+                                <input type="hidden" name="bkn_type" value="1">
+                                <input type="hidden" class="priceInt" disabled>
+
+                                <div class="step1">
+                                    <!-- <h4>Reservation Info:</h4> -->
+                                    <div class="inptBx">
+                                        <label for="prgm"><i class="fa-solid fa-location-arrow"></i> Choose the activity</label>
+                                        <br>
+                                        <select id="prgm" name="prgm" onchange="update()">
+                                            <option disabled>--Select activity--</option>
+                                            <% if (prgmData){
+                                                for (i = 0; i < prgmData.length; i++){ %>
+                                                    <option id="prgOpt" value="<%= prgmData[i].id %>" data-prg_prc="<%= prgmData[i].prg_prc %>"><%= prgmData[i].prg_nm %></option>
+                                                <%}
+                                            }%>
+                                        </select>
+                                    </div>
+
+                                    <div class="flexInptBx">
+                                        <div class="inpt">
+                                            <label for="schedDt"><i class="fa-solid fa-calendar-days"></i> Date</label><br>
+                                            <input type="date" id="schedDt" name="schedDt">
+                                        </div>
+
+                                        <div class="inpt2">
+                                            <label for="schedTm"><i class="fa-solid fa-clock"></i> Schedule</label><br>
+                                            <select name="schedTm" id="schedTm">
+                                                <% if (schedData){
+                                                    for (i = 0; i < schedData.length; i++){%>
+                                                        <option value="<%= schedData[i].id %>"><%= schedData[i].sched_tm %></option>
+                                                    <%}
+                                                } %> 
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="inptBx">
+                                        <label for="gst_amnt"><i class="fa-solid fa-user-group"></i> Participants</label><br>
+                                        <input type="number" id="gst_amnt" name="gst_amnt" value="2" onkeyup="update()">
+                                    </div>
+                                    <div class="total">
+                                        <h2 class=" ">Total</h2> <input class="price" disabled>
+                                        
+                                    </div>
+                                        
+                                    <div class="btnContain">
+                                        <button type="button" onclick="next()">Next</button>
+                                    </div>
+                                </div>
+
+                                <div class="step2">
+                                    <h4>Personal Info</h4>
+
+                                    <div class="inptBx">
+                                        <label for="gstFnm">First name</label><br>
+                                            <input type="text" id="gstFnm" name="gstFnm"> 
+                                    </div>
+                                    <div class="inptBx">
+                                        <label for="gstLnm">Last name</label><br>
+                                            <input type="text" id="gstLnm" name="gstLnm">
+                                    </div>
+                                    <div class="inptBx">
+                                        <label for="gstPhn">Phone number</label>
+                                        <input type="text" id="gstPhn" name="gstPhn"> 
+                                    </div>
+                                    <div class="inptBx">
+                                        <label for="gstAdrs">Address / Hotel</label>
+                                        <textarea type="text" id="gstAdrs" name="gstAdrs"></textarea>
+                                    </div>
+                                    <button type="button" onclick="back()" >back</button>
+                                    <button type="button" onclick="next()">next</button>
+                                </div>
+                           
+                                <div class="step3">
+                                    <h4>Billing Info</h4>
+                                    <div class="inptBx">
+                                        <label for="pmtType">Select a payment type</label><br>
+                                        <select id="pmtType" name="pmtType" onchange="update()">
+                                            <option disabled>--Select payment type--</option>
+                                            <% if (payTypeData){
+                                                for (i = 0; i < payTypeData.length; i++){ %>
+                                                    <option value="<%= payTypeData[i].id %>"><%= payTypeData[i].pmt_typs %></option>
+                                                <%}
+                                            }%>
+                                        </select>
+                                    </div>
+
+                                    <div class="inptBx">
+                                        <label for="crdNum">Enter your card number</label>
+                                        <input type="text" id="crdNum" name="crdNum" > 
+                                    </div>
+
+                                    <div class="inptBx">
+                                        <label for="crdHldr">Enter name of card holder</label>
+                                        <input type="text" id="crdHldr" name="crdHldr" > 
+                                    </div>
+
+                                    <button type="button" onclick="back()">back</button>
+                                    <button type="submit">Submit</button>
+                                </div>
+                               
+                                <!-- <input type="hidden" name="pmt_due" value=""> -->
+                                    
+                            </form>
+                        </div>
+                    
+                    </div>
+                    
+                <%}%>  
+                
+               
+            </section>
+
+        <%}else {%>
+            <div class="detailsError">
+                <div class="detailsErrMssg">
+                    <h1>UH OHHHH!!!!!</h1>
+                    <p>SEEMS THERE WAS AN ERROR WHILE TRYING TO LOAD THIS PAGE :'(</p>
+                    <div class="errImg">
+                        <img src="https://illustoon.com/photo/3395.png" alt="">
+                    </div>
+                </div>
+            </div>
+        <%} %> 
+   
+
+        
+        <script src="/dolphinCove.js"></script>
+</body>
+</html> 

@@ -1,0 +1,225 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100&family=Roboto:wght@100;300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300&display=swap');
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    outline: none;
+    list-style: none;
+}
+
+body{
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-image: radial-gradient(circle at 17% 77%, rgba(17, 17, 17,0.04) 0%, rgba(17, 17, 17,0.04) 50%,rgba(197, 197, 197,0.04) 50%, rgba(197, 197, 197,0.04) 100%),radial-gradient(circle at 26% 17%, rgba(64, 64, 64,0.04) 0%, rgba(64, 64, 64,0.04) 50%,rgba(244, 244, 244,0.04) 50%, rgba(244, 244, 244,0.04) 100%),radial-gradient(circle at 44% 60%, rgba(177, 177, 177,0.04) 0%, rgba(177, 177, 177,0.04) 50%,rgba(187, 187, 187,0.04) 50%, rgba(187, 187, 187,0.04) 100%),linear-gradient(181deg, rgb(28,250,231),rgb(43,2,159));
+    font-family: 'Roboto'
+    /* background-image: linear-gradient(0deg, rgb(249,155,6),rgb(213,182,13),rgb(255,236,8)); */
+}
+
+::-webkit-scrollbar{
+    width: 0;
+}
+
+nav{
+    width: 100%;
+    height: 4.7vw;
+    background: rgb(57,164,172);
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
+    overflow: hidden;
+}
+
+nav .logo{
+    width: 7.5vw;
+    height: 100%;
+    background: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2vw 0;
+}
+
+.logo img{
+    width: 95%;
+    height: 70%;
+    transform: scale(0.7);
+}
+
+nav .navLinksContain{
+    margin-left: 7vw;
+    text-transform: uppercase;
+}
+
+.navLinksContain .midNav_link{
+    font-size: 0.95vw;
+    font-weight: 800;
+    color: white;
+    padding: 0.6vw 2vw;
+    border-left: 1px solid rgba(0, 0, 39, 0.382);
+}
+
+.midNav_link:nth-child(1){
+    border-left: none;
+}
+
+.midNav_link:last-child{
+    padding: 2vw 4vw;
+    background: rgb(0, 0, 121);
+    color: rgb(255, 204, 0);
+    padding: 2vw 2vw;
+}
+
+.midNav_link:last-child:hover{
+    background: rgb(0, 0, 139);
+}
+
+.midNav_link:hover{
+    background: rgb(77, 189, 197);
+}
+
+nav .tollFree{
+    display: flex;
+    margin: 0 0 0 14vw;
+    /* float: right; */
+}
+
+.tollFree h3{
+    font-weight: 800;
+    font-size: 0.9vw;
+    background: rgb(255, 203, 2);
+    color: rgb(12, 12, 80);
+    padding: 0.3vw 3vw 0.3vw 0.8vw;
+    border-radius: 10px;
+    position: relative;
+}
+
+.tollFree h3 .fa-phone{
+    font-size: 1.1vw;
+    margin-right: 0.8vw;
+}
+
+.tollFree h3 .large{
+    font-size: 1.2vw;
+}
+
+.tollFree h3 img{
+    width: 1.5vw;
+    margin-left: 0.7vw;
+}
+
+.tollFree h3 .fa-sort-down{
+    /* width: 2vw; */
+    /* height: 1vw; */
+    position: absolute;
+    right: 1vw;
+    padding-left: 1vw;
+    /* margin: 0 0 0 1vw; */
+    font-size: 1.2vw;
+    /* border: 1px solid red; */
+}
+
+.tollFree .fa-cart-shopping{
+    margin-left: 1vw;
+}
+
+.body_contain{
+    width: 100%;
+    height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.body_contain .left{
+    width: 50%;
+    height: 100%;
+    /* border: 1px solid red; */
+    background: rgba(57, 164, 172, 0);
+    position: relative;
+}
+
+.left img{
+    width: 16vw;
+    position: absolute;
+    left: 2vw;
+    bottom: 0.4vw;
+}
+
+/* .left .diamond{
+    width: 2vw;
+    height: 2vw;
+    position: absolute;
+    top: 50%;
+    right: -0.3vw;
+    background: rgb(57,164,172);
+    transform: rotate( 45deg) translateY(-50%);
+} */
+
+.body_contain .right{
+    width: 50%;
+    height: 100%;
+    /* border: 1px solid red; */
+    background: rgb(255, 255, 255);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-y: auto;
+}
+
+.right form{
+    width: 40%;
+    /* border: 1px solid red; */
+}
+
+form h1{
+    text-align: center;
+    line-height: 2;
+    margin-bottom: 1vw;
+}
+
+.inptFlex{
+    display: flex;
+}
+
+form .inptBx{
+    width: 100%;
+    margin-bottom: 1.5vw;
+}
+
+form label{
+    font-weight: 500;
+}
+
+form input{
+    width: 100%;
+    height: 2.5vw;
+    padding-left: 0.5vw;
+    margin-top: 0.3vw;
+}
+
+form input[type='radio']{
+    width: 2vw;
+    height: 2vw;
+}
+
+form .frm_btn{
+    width: 100%;
+    height: 2.5vw;
+    border-radius: 5px;
+    border: none;
+    font-size: 1vw;
+    font-weight: 600;
+    background: rgb(36,50,106);
+    color: white;
+    cursor: pointer;
+    margin-bottom: 1vw;
+}
+
+.frm_btn:hover{
+    background: rgb(68, 83, 136);
+}

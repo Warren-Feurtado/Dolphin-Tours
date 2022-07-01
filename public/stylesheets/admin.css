@@ -1,0 +1,518 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+    outline: none;
+    border: none;
+}
+
+body{
+    width: 100vw;
+    background-image: linear-gradient(281deg, rgba(110, 147, 161, 0.04) 0%, rgba(110, 147, 161, 0.04) 50%,rgba(31, 225, 91, 0.04) 50%, rgba(31, 225, 91, 0.04) 100%),linear-gradient(535deg, rgba(201, 121, 180, 0.04) 0%, rgba(201, 121, 180, 0.04) 50%,rgba(1, 113, 56, 0.04) 50%, rgba(1, 113, 56, 0.04) 100%),linear-gradient(420deg, rgba(211, 211, 180, 0.04) 0%, rgba(211, 211, 180, 0.04) 50%,rgba(13, 109, 126, 0.04) 50%, rgba(13, 109, 126, 0.04) 100%),linear-gradient(524deg, rgba(52, 121, 135, 0.04) 0%, rgba(52, 121, 135, 0.04) 50%,rgba(18, 246, 96, 0.04) 50%, rgba(18, 246, 96, 0.04) 100%),linear-gradient(486deg, rgba(127, 18, 115, 0.04) 0%, rgba(127, 18, 115, 0.04) 50%,rgba(70, 203, 229, 0.04) 50%, rgba(70, 203, 229, 0.04) 100%),linear-gradient(400deg, rgba(131, 205, 141, 0.04) 0%, rgba(131, 205, 141, 0.04) 50%,rgba(37, 31, 18, 0.04) 50%, rgba(37, 31, 18, 0.04) 100%),linear-gradient(418deg, rgba(13, 183, 43, 0.04) 0%, rgba(13, 183, 43, 0.04) 50%,rgba(103, 42, 135, 0.04) 50%, rgba(103, 42, 135, 0.04) 100%),linear-gradient(429deg, rgba(85, 200, 233, 0.04) 0%, rgba(85, 200, 233, 0.04) 50%,rgba(215, 24, 12, 0.04) 50%, rgba(215, 24, 12, 0.04) 100%),linear-gradient(423deg, rgba(95, 197, 25, 0.04) 0%, rgba(95, 197, 25, 0.04) 50%,rgba(30, 61, 7, 0.04) 50%, rgba(30, 61, 7, 0.04) 100%),linear-gradient(375deg, rgba(132, 241, 60, 0.04) 0%, rgba(132, 241, 60, 0.04) 50%,rgba(52, 203, 19, 0.04) 50%, rgba(52, 203, 19, 0.04) 100%),linear-gradient(335deg, rgba(67, 161, 9, 0.04) 0%, rgba(67, 161, 9, 0.04) 50%,rgba(27, 242, 201, 0.04) 50%, rgba(27, 242, 201, 0.04) 100%),linear-gradient(539deg, rgba(33, 36, 218, 0.04) 0%, rgba(33, 36, 218, 0.04) 50%,rgba(248, 232, 35, 0.04) 50%, rgba(248, 232, 35, 0.04) 100%),linear-gradient(267deg, rgba(236, 115, 112, 0.04) 0%, rgba(236, 115, 112, 0.04) 50%,rgba(33, 180, 6, 0.04) 50%, rgba(33, 180, 6, 0.04) 100%),linear-gradient(303deg, rgba(11, 133, 241, 0.04) 0%, rgba(11, 133, 241, 0.04) 50%,rgba(197, 131, 207, 0.04) 50%, rgba(197, 131, 207, 0.04) 100%),linear-gradient(324deg, rgb(50, 233, 241),rgb(7, 146, 201));
+}
+
+/* ------------------ Scroll-Bar ---------------------- */
+::-webkit-scrollbar {
+    width: 0.3vw;
+    /* height: 0.5vw; */
+    background-color: rgb(241, 241, 241) ;
+}
+::-webkit-scrollbar-thumb {
+    background-color: rgb(228, 228, 228) ;
+    /* border-radius: 15px; */
+}
+
+.body_contain{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: space-between;
+    overflow: hidden;
+}
+
+/* ------------------ DASHBOARD - MENU ---------------------- */
+.body_contain .dash_menu{
+    width: 17%;
+    height: 100%;
+    position: relative;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    background: white;
+    border-right: 1px solid rgb(238, 238, 238);
+    box-shadow: 0px 0px 5px 2px rgba(57, 57, 57, 0.384);
+    z-index: 10;
+    transition: 0.7s ease-out;
+    padding-bottom: 5vw;
+}
+.dash_menu.showHide{
+    margin-left: -20%;
+    opacity: 0;
+}
+
+.logo{
+    /* width: 5vw; */
+    height: 5vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* border: 1px solid red; */
+    background-color: rgb(255, 255, 255);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.108);
+    overflow: hidden;
+}
+
+.logo .logo-img{
+    width: 8vw;
+    /* height: 80%; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo-img img{
+    width: 100%;
+    height: 100%;
+}
+
+.logo .logo_txt{
+    padding-top: 0.2vw;
+    color: white;
+    /* font-size: 2vw; */
+    line-height: 1;
+    color: yellow;
+}
+
+.profil_info{
+    text-align: center;
+    margin-top: 2vw;
+}
+
+.profil_info .profile_photo{
+    width: 6vw;
+    height: 6vw;
+    margin: 2vw auto 1vw auto;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 4px solid rgb(255, 255, 255);
+    box-shadow: 0px 0px 5px 2px rgba(174, 174, 174, 0.593);
+}
+.profile_photo img{
+    width: 100%;
+    height: 100%;
+}
+
+.profil_info p{
+    font-size: 1.5vw;
+    font-weight: bold;
+}
+
+.profil_info span{
+    font-size: 1.2vw;
+    line-height: 1.5;
+    /* font-weight: 600; */
+}
+
+.dash_menu .dash_opts{
+    width: 100%;
+    margin-top: 2vw;
+    overflow-x: hidden;
+    padding: 1vw 0;
+}
+
+.dash_opts .option{
+    width: 100%;
+}
+
+.option summary{
+    width: 100%;
+    padding: 1vw 0 1vw 1vw;
+    position: relative; 
+    cursor: pointer;
+    transition: 0.4s ease;
+    font-size: 1.2vw;
+    border: 5px solid #17aaa000;
+    display: flex;
+    align-items: center;
+}
+
+.option summary:hover{
+    /* border-left: 7px solid rgb(233, 222, 13); */
+    background: rgb(230, 230, 230);
+}
+
+summary a{
+    width: 100%;
+    /* padding: 1vw 0; */
+    color: black;
+}
+
+summary .fa-angle-down{
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin-left: 6vw;
+    padding: 1vw;
+    font-size: 0.7vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+summary .fa-users, summary .fa-child-reaching, summary .fa-clipboard, summary .fa-house-user, summary .fa-calendar-days, summary .fa-book-bookmark{
+    margin-right: 1vw;
+}
+
+.option p{
+    width: 100%;
+    background: rgb(28, 10, 161);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   
+}
+
+.option p a{
+    width: 80vw;
+    padding: 1vw ;
+    padding-left: 3vw;
+    color: rgba(255, 255, 255, 0.897);
+    transition: 0.2s ease;
+}
+.option p:hover a{
+    background: rgb(16, 5, 113);
+    /* color: rgb(245, 241, 17); */
+}
+
+.logOut{
+    position: absolute;
+    bottom: 5vw;
+    left: 2vw;
+    padding: 0.5vw 1vw;
+    color: white;
+    border-radius: 5px;
+    background-color: rgb(23,47,109);
+}
+
+/* ------------------ BODY / MAIN ---------------------- */
+.body_contain .body_main{
+    width: 83%;
+    height: 100%;   
+    position: relative;
+    overflow-y: auto;
+    overflow-x: hidden;
+    transition: 1s all;
+    padding-bottom: 5vw;
+}
+
+.body_main.width_adjust{
+    width: 100%;
+}
+
+.body_main .top_bar{
+    width:100%;
+    height: 5vw;
+    /* border-bottom: 1px solid rgb(214, 214, 214); */
+    box-shadow: 4px 0px 5px 2px rgba(10, 10, 10, 0.384);
+    background-color: rgb(57,164,177);
+    position: fixed;
+    z-index: 10;
+}
+
+.top_bar .menu_bars{
+    height: 100%;
+    width: 2vw;
+    margin-left: 2vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.menu_bars .fa-bars{
+    font-size: 2vw;
+    /* opacity: 0.7; */
+    cursor: pointer;
+    transition: 0.1s ease;
+    /* color: rgb(0, 0, 0); */
+    color: rgb(23,47,109);
+}
+.fa-bars:hover{
+    
+    color: rgb(56, 79, 145);
+}
+
+.body_main h1{
+    display: inline-block;
+    margin: 7vw 0 0 2vw;
+    font-size: 1.5vw;
+    color: rgb(0, 0, 0);
+}
+.body_main h1::after{
+    content: "";
+    width: 20%;
+    height: 3px;
+    background: rgb(23,47,109);
+    display: block;
+    margin-top: 0.5vw;
+    border-radius: 40px;
+}
+
+.body_main .count_bx{
+    margin: 3vw 0 0 5vw;
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
+    /* border: 1px solid red; */
+}
+
+.search{
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* border: 1px solid red; */
+}
+
+.search form{
+    height: 2.3vw;
+}
+
+.search form input[type="search"]{
+    height: 100%;
+    width: 20vw;
+    border-radius: 5px;
+    padding-left: 0.5vw;
+}
+
+
+.search form .btn_srch{
+    width: 7vw;
+    height: 100%;
+    background: rgb(0, 0, 0);
+    border-radius: 5px;
+    cursor: pointer;
+    border: 1px solid black;
+    color: white;
+}
+
+.count_bx .count{
+    padding: 1vw 1.5vw;
+    margin-right: 7vw;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px 2px rgba(10, 10, 10, 0.384);
+    background: white;
+}
+
+.count h2{
+    font-size: 2vw;
+    color: rgb(174, 0, 0);
+}
+
+.count p{
+    font-size: 1vw;
+    color: black;
+}
+
+
+.scss_mssg_cont{
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    background: rgba(0, 0, 0, 0.458);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.scss_mssg{
+    width: 20%;
+    height: 20%;
+    position: relative;
+    background: white;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 0px 5px 3px rgba(0, 0, 0, 0.323);
+}
+
+
+/* ----------------- ADMIN BOOKING FORM -------------------- */
+.form_ctrl{
+    width: 100%;
+}
+
+.form_ctrl h2{
+    text-align: center;
+}
+
+.bkngForm{
+    width: 90%;
+    /* float: right; */
+    margin: 2vw auto 0 auto;
+    background: rgba(255, 255, 255, 0.285);
+    border: 1px solid rgba(255, 255, 255, 0.158);
+    box-shadow: 2px 4px 7px 1px rgba(0, 0, 0, 0.177);
+    border-radius: 2px;
+}
+
+.stepsCont{
+    display: flex;
+    /* border: 1px solid red; */
+    padding: 1vw 0;
+}
+
+.bkngForm h3{
+    width: 100%;
+    color: white;
+    font-size: 1.1vw;
+    letter-spacing: -1px;
+    text-align: center;
+    padding: 0.7vw 0;
+    background: rgb(57,164,172);
+    border-radius: 10px 10px 0 0;
+}
+
+.admStep1, .admStep2, .admStep3{
+    width: 100%;
+    padding: 1vw;
+}
+
+.admStep1, .admStep2{
+    border-right: 1px solid rgba(0, 0, 0, 0.212);
+}
+
+.bkngForm .flexInptBx{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 1vw;
+    /* border: 1px solid red; */
+}
+
+.flexInptBx .inpt{
+    width: 95%;
+    /* margin-top: 1vw; */
+}
+
+.flexInptBx .inpt2{
+    width: 95%;
+}
+
+.bkngForm label{
+    font-weight: 800;
+    color: rgb(0, 0, 0);
+}
+
+.inpt2 label, .inpt2 select, .inpt2 input{
+    margin-left: 1vw;
+}
+
+.inpt input, .inpt select, .inpt2 input, .inpt2 select{
+    width: 90%;
+}
+
+.bkngForm .inptBx{
+    width: 100%;
+    margin-top: 1vw;
+    /* border: 1px solid red; */
+}
+
+.inptBx:first-child{
+    margin-top: -0.3vw;
+}
+
+.inptBx input, .inptBx select, .inptBx textarea{
+    width: 100%;
+}
+
+input, select, textarea{
+    height: 2.5vw;
+    font-weight: 600;
+    color: rgb(90, 90, 90);
+    padding: 0 0.7vw;
+    margin-top: 0.2vw;
+    background: rgba(255, 255, 255, 0.54);
+    border-radius: 5px;
+    border: 1px solid rgb(228, 228, 228);
+}
+
+textarea{
+    height: 5vw;
+    padding-top: 0.7vw;
+}
+
+input:hover, select:hover, textarea:hover{
+    border: 1px solid rgb(57,164,177);
+}
+
+select option{
+    font-size: 1.1vw;
+    padding-top: 1vw;
+}
+
+
+.btnContain{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.total{
+    width: 100%;
+    height: 4vw;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    margin-top: 0.5vw;
+    /* border: 1px solid rgb(243, 9, 9); */
+}
+
+.total h2{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    color: black;
+}
+
+.total .price{
+    width: 70%;
+    margin-left: 1vw;
+    font-size: 1.5vw;
+    background: transparent;
+    /* float: right; */
+    color: orangered;
+    border: none;
+}
+
+button{
+    width: 100%;
+    height: 3vw;
+    background: rgb(192, 0, 0);
+    border-radius: 5px;
+    /* margin-top: 1vw; */
+    font-size: 1.2vw;
+    font-weight: 600;
+    color: white;
+    cursor: pointer;
+    transition: 0.15s;
+}
+
+/* .step2 button, .step3 button{
+    width: 30%;
+    height: 2vw;
+    background: red;
+    border-radius: 5px;
+    margin-top: 1vw;
+    color: white;
+    cursor: pointer;
+    transition: 0.15s;
+} */
+
+button:hover{
+    background: rgb(234, 79, 79);
+}

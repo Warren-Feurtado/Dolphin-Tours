@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/stylesheets/admin.css">
+        <link rel="stylesheet" href="/stylesheets/tables.css">
+        <script src="https://kit.fontawesome.com/d1a2b3af9c.js" crossorigin="anonymous"></script>
+        <title><%= title %></title>
+    </head>
+    
+    <body>
+        <div class="body_contain">
+            <!--------- DASHBOARD MENU --------->
+            <section class="dash_menu ">
+                <a href="/" class="links">
+                    <div class="logo">
+                        <div class="logo-img">
+                            <img src="https://www.dolphincoveja.com/Content/src/logo.png" alt="Dolphin Cove logo">
+                        </div>
+                    </div>
+                </a>
+                <div class="profil_info">
+                    <div class="profile_photo">
+                        <img src="https://images.unsplash.com/photo-1627161684458-a62da52b51c3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=549&q=80" alt="">
+                    </div>
+                    <span><%= my_session.adm_fnm %> <%= my_session.adm_lnm %></span>
+                    <h4><%= my_session.pos %></h4>
+                </div>
+                <div class="dash_opts">
+                    
+                    <details class="option">
+                        <summary><a href="/admin"><i class="fa-solid fa-house-user"></i>Dashboard</a></summary>
+                    </details>
+    
+                    <% if (my_session.loggedin == true && my_session.pos == 'Super Admin'){ %>
+                        <details class="option">
+                            <summary><i class="fa-solid fa-book-bookmark"></i>Manage Bookings</summary>
+                            <p><a href="/admin/dolphin-cove-bookings" title="View All Cove Bookings">Cove Bookings</a></p>
+                            <p><a href="/admin/dolphin-tour-bookings" title="View All Tour Bookings">Tour Bookings</a></p>
+                        </details>
+
+                        <details class="option">
+                            <summary><i class="fa-solid fa-calendar-days"></i>Manage Programs</summary>
+                            <p><a href="/admin/dolphin-cove-programs" title="View All Cove Programs">Cove Programs</a></p>
+                            <p><a href="" title="View All Tour Packages">Tour Packages</a></p>
+                        </details>
+
+                    <%} else if (my_session.loggedin == true && my_session.pos == 'Cove Admin'){%>
+                        <details class="option">
+                            <summary><a href="/admin/dolphin-cove-bookings" title="View All Dolphin Cove Bookings"><i class="fa-solid fa-book-bookmark"></i>Cove Bookings</a></summary>
+                        </details>
+
+                        <details class="option">
+                            <summary><a href="/admin/dolphin-cove-programs" title="View All Dolphin Cove Programs"><i class="fa-solid fa-calendar-days"></i>Cove Programs</a></summary>
+                        </details>
+
+                    <%} else if (my_session.loggedin == true && my_session.pos == 'Tour Admin'){%>
+                        <details class="option">
+                            <summary><a href="/admin/dolphin-tour-bookings" title="View All Tour Bookings"><i class="fa-solid fa-book-bookmark"></i>Tour Bookings</a></summary>
+                        </details>
+
+                        <details class="option">
+                            <summary><a href="" title="View All Tour Packages"><i class="fa-solid fa-calendar-days"></i>Tour Packages</a></summary>
+                        </details>
+                    <%} %>
+                    <a class="logOut" href="/login/logout"><i class="fa-solid fa-arrow-right-from-bracket"></i> log out</a>
+                </div>        
+            </section>
+        
+    
+            <!--------- BODY / MAIN --------->
+            <section class="body_main ">
+                <div class="top_bar">
+                    <div onclick="hideMenu()" title="Side Bar" class="menu_bars ">
+                    <i class="fa-solid fa-bars"></i>
+                    </div>
+                </div>
+    
+                <h1>Dolphin Cove Bookings</h1>
+
+                <section class="form_ctrl">
+            
+                    <h2>Make a Guest Reservation</h2>
+                    <form action="/admin/cove-reserve" method="post" class="bkngForm">
+                        
+                        <input type="hidden" name="bkn_dt" value="<%= res_dt %>">
+                        <input type="hidden" name="bkn_type" value="2">
+                        <input type="hidden" class="priceInt">
+
+                        <div class="stepsCont">
+                            <div class="admStep1">
+                                <h4>Reservation Info:</h4>
+                                <div class="inptBx">
+                                    <label for="locId"><i class="fa-solid fa-location-arrow"></i> Select the location</label>
+                                    <br>
+                                    <select id="locId" name="locId">
+                                        <option disabled>--Select location--</option>
+                                        <% if (locaData){
+                                            for (i = 0; i < locaData.length; i++){ %>
+                                                <option id="prgOpt" value="<%= locaData[i].id %>"><%= locaData[i].prk_nm %></option>
+                                            <%}
+                                        }%>
+                                    </select>
+                                </div>
+                                
+                                <div class="inptBx">
+                                    <label for="prgm">Select the activity</label>
+                                    <br>
+                                    <select id="prgm" name="prgm" onchange="admUpdate()">
+                                        <option disabled>--Select activity--</option>
+                                        <% if (prgmData){
+                                            for (i = 0; i < prgmData.length; i++){ %>
+                                                <option id="prgOpt" value="<%= prgmData[i].id %>" data-prg_prc="<%= prgmData[i].prg_prc %>"><%= prgmData[i].prg_nm %></option>
+                                            <%}
+                                        }%>
+                                    </select>
+                                </div>
+    
+                                <div class="flexInptBx">
+                                    <div class="inpt">
+                                        <label for="schedDt"><i class="fa-solid fa-calendar-days"></i> Date</label><br>
+                                        <input type="date" id="schedDt" name="schedDt">
+                                    </div>
+    
+                                    <div class="inpt2">
+                                        <label for="schedTm"><i class="fa-solid fa-clock"></i> Schedule</label><br>
+                                        <select name="schedTm" id="schedTm">
+                                            <% if (schedData){
+                                                for (i = 0; i < schedData.length; i++){%>
+                                                    <option value="<%= schedData[i].id %>"><%= schedData[i].sched_tm %></option>
+                                                <%}
+                                            } %> 
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <div class="inptBx">
+                                    <label for="gst_amnt"><i class="fa-solid fa-user-group"></i> Participants</label><br>
+                                    <input type="number" id="gst_amnt" name="gst_amnt" value="2" onkeyup="admUpdate()" min="1">
+                                </div>
+                                    
+                                <!-- <div class="btnContain">
+                                    <button type="button" onclick="next()">Next</button>
+                                </div> -->
+                            </div>
+                        
+                            <div class="admStep2">
+                                <h4>Guest Info</h4>
+    
+                                <div class="inptBx">
+                                    <label for="gstFnm">First name</label><br>
+                                        <input type="text" id="gstFnm" name="gstFnm"> 
+                                </div>
+                                <div class="inptBx">
+                                    <label for="gstLnm">Last name</label><br>
+                                        <input type="text" id="gstLnm" name="gstLnm">
+                                </div>
+                                <div class="inptBx">
+                                    <label for="gstPhn">Phone number</label>
+                                    <input type="text" id="gstPhn" name="gstPhn"> 
+                                </div>
+                                <div class="inptBx">
+                                    <label for="gstAdrs">Address / Hotel</label>
+                                    <textarea type="text" id="gstAdrs" name="gstAdrs"></textarea>
+                                </div>
+                                <!-- <button type="button" onclick="back()" >back</button>
+                                <button type="button" onclick="next()">next</button> -->
+                            </div>
+                       
+                            <div class="admStep3">
+                                <h4>Billing Info</h4>
+                                <div class="inptBx">
+                                    <label for="pmtType">Select a payment type</label><br>
+                                    <select id="pmtType" name="pmtType">
+                                        <option disabled>--Select payment type--</option>
+                                        <% if (payTypeData){
+                                            for (i = 0; i < payTypeData.length; i++){ %>
+                                                <option value="<%= payTypeData[i].id %>"><%= payTypeData[i].pmt_typs %></option>
+                                            <%}
+                                        }%>
+                                    </select>
+                                </div>
+    
+                                <div class="inptBx">
+                                    <label for="crdNum">Enter your card number</label>
+                                    <input type="text" id="crdNum" name="crdNum" > 
+                                </div>
+    
+                                <div class="inptBx">
+                                    <label for="crdHldr">Enter name of card holder</label>
+                                    <input type="text" id="crdHldr" name="crdHldr" > 
+                                </div>
+
+                                <div class="total">
+                                    <h2 class=" ">Total</h2> <input class="price" disabled>   
+                                </div>
+    
+                                <!-- <button type="button" onclick="back()">back</button> -->
+                                <div class="btnContain">
+                                    <button type="submit">Submit</button>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </form>
+                </section>
+                <br><br>
+                
+                <h2 style="text-align: center; color: rgb(0, 0, 0);">Bookings List</h2>
+                <div class="table-contain">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <!-- <th>ID#</th> -->
+                                <th>INV#</th>
+                                <th>Program</th>
+                                <th>Request Date</th>
+                                <th>Guest Amount</th>
+                                <th>Guest Name</th>
+                                <th>Phone</th>
+                                <th>Address</th>
+                                <th>Booking Type</th>
+                                <th>Date Booked</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% if(coveBookData.length){
+                   
+                                for(var i = 0; i < coveBookData.length; i++) {%>  
+                                    <tr>
+                                        <th><%= coveBookData[i].inv_num %></th>
+                                        <td><%= coveBookData[i].reqPrg %></td>
+                                        <td><%= new Date(coveBookData[i].prog_dt).toLocaleDateString()%></td>
+                                        <td><%= coveBookData[i].gst_amnt %></td>
+                                        <td><%= coveBookData[i].gst_fnm %> <%= coveBookData[i].gst_lnm %></td> 
+                                        <td><%= coveBookData[i].gst_phn %></td>
+                                        <td><%= coveBookData[i].gst_adrs %></td>
+                                        <td><%= coveBookData[i].bkTyp %></td>
+                                        <td><%= new Date(coveBookData[i].bkn_dt).toLocaleDateString()%></td>
+                                        <!-- <td colspan="2">
+                                            <a href="/admin/edit" title="Edit or replace this book"><i class="fa-solid fa-pencil"></i></a>                                                                                       
+                                            <a href="/admin/delete" title="Delete this book"><i class="fa-solid fa-trash-can"></i></a>                                            
+                                        </td> -->
+                                    </tr>
+                                <% }
+                            }else{ %>
+                                <tr>
+                                    <td colspan="8"><h2>No Bookings</h2>
+                                        <div class="empty">
+                                            <img src="https://assets.materialup.com/uploads/c83a9663-be0b-4397-b1af-67f520e44ef1/preview.png" alt="">
+                                        </div>
+                                    </td>
+                                </tr>
+                            <% } %>    
+                        </tbody>
+                    </table>
+                </div>
+
+            </section>
+            <% if (messages.success) { %>
+                <div class="scss_mssg_cont">
+                    <div class="scss_mssg">
+                        <p style="color: green"><%- messages.success %></p>
+                    </div>
+                </div> 
+            <% } %> 
+            <script src="/dolphinCove.js"></script>
+        <script >
+            function hideMenu(){
+                document.querySelector('.dash_menu').classList.toggle('showHide');
+                document.querySelector('.body_main').classList.toggle('width_adjust');
+            }
+        </script>
+    </body>
+</html>
